@@ -1,0 +1,29 @@
+[
+    {
+        "biometric_id": "BIO-001",
+        "nom": "Dupont",
+        "prenom": "Jean",
+        "date_naissance": "1985-03-15",
+        "adresse": "12 Rue de la Paix, 75002 Paris",
+        "telephone": "+33612345678",
+        "password": "JeanPass1985"
+    },
+    {
+        "biometric_id": "BIO-002",
+        "nom": "Lefevre",
+        "prenom": "Marie",
+        "date_naissance": "1990-07-22",
+        "adresse": "5 Avenue des Champs-Élysées, 75008 Paris",
+        "telephone": "+33698765432",
+        "password": "MariePass1990"
+    },
+    {
+        "biometric_id": "BIO-003",
+        "nom": "Martin",
+        "prenom": "Pierre",
+        "date_naissance": "1978-11-10",
+        "adresse": "9 Boulevard Haussmann, 75009 Paris",
+        "telephone": "+33645678901",
+        "password": "PierrePass1978"
+    }
+]

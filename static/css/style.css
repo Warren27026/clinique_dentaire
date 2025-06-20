@@ -1,0 +1,183 @@
+
+     body {
+         font-family: 'Roboto', sans-serif;
+         background-color: #F5F7FA;
+         margin: 0;
+         padding: 0;
+         color: #333333;
+     }
+
+     .container {
+         max-width: 1200px;
+         margin: 0 auto;
+         padding: 20px;
+     }
+
+     h1, h2 {
+         color: #2B4E72;
+         margin-bottom: 20px;
+         font-weight: 700;
+         text-transform: uppercase;
+         letter-spacing: 1px;
+     }
+
+     .card {
+         background-color: #FFFFFF;
+         border-radius: 12px;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+         padding: 25px;
+         margin-bottom: 30px;
+         transition: transform 0.3s ease, box-shadow 0.3s ease;
+     }
+
+     .card:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+     }
+
+     .navbar {
+         background-color: #4A90E2 !important;
+         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+     }
+
+     .navbar-brand {
+         font-weight: 700;
+         font-size: 1.5rem;
+         color: #FFFFFF !important;
+     }
+
+     .nav-link {
+         color: #FFFFFF !important;
+         transition: color 0.3s ease, transform 0.3s ease;
+     }
+
+     .nav-link:hover {
+         color: #DDEEFF !important;
+         transform: scale(1.1);
+     }
+
+     table {
+         width: 100%;
+         border-collapse: collapse;
+         margin-bottom: 20px;
+         background-color: #FFFFFF;
+         border-radius: 8px;
+         overflow: hidden;
+     }
+
+     th, td {
+         padding: 15px;
+         text-align: left;
+         border-bottom: 1px solid #E9ECEF;
+     }
+
+     th {
+         background-color: #2B4E72;
+         color: #FFFFFF;
+         font-weight: 600;
+     }
+
+     tr:hover {
+         background-color: #F1F3F5;
+     }
+
+     .btn-custom {
+         padding: 12px 24px;
+         border-radius: 50px;
+         font-weight: 500;
+         transition: background-color 0.3s ease, transform 0.3s ease;
+     }
+
+     .btn-primary {
+         background-color: #4A90E2;
+         border-color: #4A90E2;
+     }
+
+     .btn-primary:hover {
+         background-color: #357ABD;
+         border-color: #357ABD;
+         transform: translateY(-2px);
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     }
+
+     .btn-success {
+         background-color: #6AB04C;
+         border-color: #6AB04C;
+     }
+
+     .btn-success:hover {
+         background-color: #558C3F;
+         border-color: #558C3F;
+         transform: translateY(-2px);
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     }
+
+     .btn-danger {
+         background-color: #E57373;
+         border-color: #E57373;
+     }
+
+     .btn-danger:hover {
+         background-color: #C95C5C;
+         border-color: #C95C5C;
+         transform: translateY(-2px);
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     }
+
+     .btn-secondary {
+         background-color: #6C757D;
+         border-color: #6C757D;
+     }
+
+     .btn-secondary:hover {
+         background-color: #5A6268;
+         border-color: #5A6268;
+         transform: translateY(-2px);
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     }
+
+     .alert {
+         padding: 15px;
+         border-radius: 8px;
+         margin-bottom: 20px;
+         animation: fadeIn 0.5s ease-in;
+     }
+
+     .alert-success {
+         background-color: #E8F5E9;
+         color: #2E7D32;
+         border: 1px solid #C8E6C9;
+     }
+
+     .alert-danger {
+         background-color: #FFEBEE;
+         color: #C62828;
+         border: 1px solid #FFCDD2;
+     }
+
+     .form-control {
+         border-radius: 8px;
+         border-color: #CED4DA;
+         transition: border-color 0.3s ease, box-shadow 0.3s ease;
+     }
+
+     .form-control:focus {
+         border-color: #4A90E2;
+         box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+     }
+
+     @keyframes fadeIn {
+         from { opacity: 0; transform: translateY(-10px); }
+         to { opacity: 1; transform: translateY(0); }
+     }
+
+     .icon {
+         margin-right: 8px;
+     }
+.btn-custom:hover {
+    background-color: #6AB04C;
+    transition: background-color 0.3s ease;
+}
+.navbar-dark .nav-link:hover {
+    color: #6AB04C !important;
+}

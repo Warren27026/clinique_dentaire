@@ -1,0 +1,117 @@
+
+     {% load static %}
+     <!DOCTYPE html>
+     <html lang="fr">
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>Planifier un Rendez-vous</title>
+         <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+     </head>
+     <body>
+         <nav class="navbar navbar-expand-lg" style="background-color: #1E90FF;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'accueil' %}" style="font-family: 'Pacifico', cursive; color: white;">
+            Clinique Dentaire <span style="color: #A52A2A;">La Couronne</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+        <a class="nav-link active" href="{% url 'accueil' %}"><i class="bi bi-house icon"></i> Accueil</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'patient_list' %}"><i class="bi bi-people icon"></i> Patients</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'appointment_list' %}"><i class="bi bi-calendar-event icon"></i> Rendez-vous</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'dossier_create' %}"><i class="bi bi-folder icon"></i> Dossier Médical</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'examen_resultat_list' %}"><i class="bi bi-clipboard-data icon"></i> Résultats Examens</a>
+    </li>
+    {% if user.groups.name == 'Assurance' %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'patient_list' %}"><i class="bi bi-person-check icon"></i> Vérifier Patients</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'bon_assurance_list' %}"><i class="bi bi-shield-check icon"></i> Valider Bons</a>
+        </li>
+    {% endif %}
+                {% if user.is_authenticated and user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'admin:index' %}"><i class="bi bi-gear"></i> Admin</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link btn btn-link text-white" style="border: none; background: none; padding: 0;">
+                                <i class="bi bi-box-arrow-right"></i> Déconnexion
+                            </button>
+                        </form>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+         <div class="container">
+             <div class="card mt-4">
+                 <h2><i class="bi bi-calendar-event-fill icon"></i> Planifier un Rendez-vous</h2>
+                 <form method="post">
+                     {% csrf_token %}
+                     <div class="mb-3">
+                         <label for="{{ form.patient.id_for_label }}" class="form-label">{{ form.patient.label }}</label>
+                         <select id="{{ form.patient.id_for_label }}" name="{{ form.patient.name }}" class="form-control">
+                             {% for value, label in form.patient.field.choices %}
+                                 <option value="{{ value }}" {% if form.patient.value == value %}selected{% endif %}>{{ label }}</option>
+                             {% endfor %}
+                         </select>
+                         {% if form.patient.errors %}
+                             <div class="alert alert-danger">{{ form.patient.errors }}</div>
+                         {% endif %}
+                     </div>
+                     <div class="mb-3">
+                         <label for="{{ form.date_rdv.id_for_label }}" class="form-label">{{ form.date_rdv.label }}</label>
+                         <input type="datetime-local" id="{{ form.date_rdv.id_for_label }}" name="{{ form.date_rdv.name }}" value="{{ form.date_rdv.value|default:"" }}" class="form-control">
+                         {% if form.date_rdv.errors %}
+                             <div class="alert alert-danger">{{ form.date_rdv.errors }}</div>
+                         {% endif %}
+                     </div>
+                     <div class="mb-3">
+                         <label for="{{ form.medecin.id_for_label }}" class="form-label">{{ form.medecin.label }}</label>
+                         <input type="text" id="{{ form.medecin.id_for_label }}" name="{{ form.medecin.name }}" value="{{ form.medecin.value|default:"" }}" class="form-control">
+                         {% if form.medecin.errors %}
+                             <div class="alert alert-danger">{{ form.medecin.errors }}</div>
+                         {% endif %}
+                     </div>
+                     <div class="mb-3">
+                         <label for="{{ form.motif.id_for_label }}" class="form-label">{{ form.motif.label }}</label>
+                         <textarea id="{{ form.motif.id_for_label }}" name="{{ form.motif.name }}" class="form-control">{{ form.motif.value|default:"" }}</textarea>
+                         {% if form.motif.errors %}
+                             <div class="alert alert-danger">{{ form.motif.errors }}</div>
+                         {% endif %}
+                     </div>
+                     <div class="d-flex gap-2">
+                         <button type="submit" class="btn btn-primary btn-custom"><i class="bi bi-save icon"></i> Enregistrer</button>
+                         <a href="{% url 'patient_list' %}" class="btn btn-secondary btn-custom"><i class="bi bi-x-circle icon"></i> Annuler</a>
+                     </div>
+                 </form>
+             </div>
+         </div>
+
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     </body>
+     </html>

@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if form.instance.pk %}Modifier{% else %}Ajouter{% endif %} un Patient</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg" style="background-color: #1E90FF;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'accueil' %}" style="font-family: 'Pacifico', cursive; color: white;">
+                Clinique Dentaire <span style="color: #A52A2A;">La Couronne</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'accueil' %}"><i class="bi bi-house icon"></i> Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'patient_list' %}"><i class="bi bi-people icon"></i> Patients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'appointment_list' %}"><i class="bi bi-calendar-event icon"></i> Rendez-vous</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dossier_create' %}"><i class="bi bi-folder icon"></i> Dossier Médical</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'examen_resultat_list' %}"><i class="bi bi-clipboard-data icon"></i> Résultats Examens</a>
+                    </li>
+                    {% if user.groups.name == 'Assurance' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'patient_list' %}"><i class="bi bi-person-check icon"></i> Vérifier Patients</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'bon_assurance_list' %}"><i class="bi bi-shield-check icon"></i> Valider Bons</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_authenticated and user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'admin:index' %}"><i class="bi bi-gear"></i> Admin</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link btn btn-link text-white" style="border: none; background: none; padding: 0;">
+                                    <i class="bi bi-box-arrow-right"></i> Déconnexion
+                                </button>
+                            </form>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="card mt-4">
+            <h2><i class="bi bi-person-plus-fill icon"></i> {% if form.instance.pk %}Modifier{% else %}Ajouter{% endif %} un Patient</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="{{ form.biometric_id.id_for_label }}" class="form-label">{{ form.biometric_id.label }}</label>
+                    <input type="text" id="{{ form.biometric_id.id_for_label }}" name="{{ form.biometric_id.name }}" value="{{ form.biometric_id.value|default:'' }}" class="form-control">
+                    {% if form.biometric_id.errors %}
+                        <div class="alert alert-danger">{{ form.biometric_id.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.nom.id_for_label }}" class="form-label">{{ form.nom.label }}</label>
+                    <input type="text" id="{{ form.nom.id_for_label }}" name="{{ form.nom.name }}" value="{{ form.nom.value|default:'' }}" class="form-control">
+                    {% if form.nom.errors %}
+                        <div class="alert alert-danger">{{ form.nom.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.prenom.id_for_label }}" class="form-label">{{ form.prenom.label }}</label>
+                    <input type="text" id="{{ form.prenom.id_for_label }}" name="{{ form.prenom.name }}" value="{{ form.prenom.value|default:'' }}" class="form-control">
+                    {% if form.prenom.errors %}
+                        <div class="alert alert-danger">{{ form.prenom.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.date_naissance.id_for_label }}" class="form-label">{{ form.date_naissance.label }}</label>
+                    <input type="date" id="{{ form.date_naissance.id_for_label }}" name="{{ form.date_naissance.name }}" value="{{ form.date_naissance.value|default:'' }}" class="form-control">
+                    {% if form.date_naissance.errors %}
+                        <div class="alert alert-danger">{{ form.date_naissance.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.adresse.id_for_label }}" class="form-label">{{ form.adresse.label }}</label>
+                    <input type="text" id="{{ form.adresse.id_for_label }}" name="{{ form.adresse.name }}" value="{{ form.adresse.value|default:'' }}" class="form-control">
+                    {% if form.adresse.errors %}
+                        <div class="alert alert-danger">{{ form.adresse.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.telephone.id_for_label }}" class="form-label">{{ form.telephone.label }}</label>
+                    <input type="text" id="{{ form.telephone.id_for_label }}" name="{{ form.telephone.name }}" value="{{ form.telephone.value|default:'' }}" class="form-control">
+                    {% if form.telephone.errors %}
+                        <div class="alert alert-danger">{{ form.telephone.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="id_password" class="form-label">Mot de passe</label>
+                    <input type="password" id="id_password" name="password" class="form-control" required>
+                    {% if form.errors.password %}
+                        <div class="alert alert-danger">{{ form.errors.password }}</div>
+                    {% endif %}
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary btn-custom"><i class="bi bi-save icon"></i> Enregistrer</button>
+                    <a href="{% url 'patient_list' %}" class="btn btn-secondary btn-custom"><i class="bi bi-x-circle icon"></i> Annuler</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

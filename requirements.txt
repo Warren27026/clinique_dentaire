@@ -1,0 +1,8 @@
+asgiref==3.8.1
+cffi==1.17.1
+cryptography==45.0.4
+Django==5.2.3
+django-fernet-fields @ git+https://github.com/orcasgit/django-fernet-fields.git@8f8cadb8a9637e3f5777c98b9a9dd7db1b044374
+pycparser==2.22
+sqlparse==0.5.3
+tzdata==2025.2
