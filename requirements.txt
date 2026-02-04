@@ -6,3 +6,4 @@ django-fernet-fields @ git+https://github.com/orcasgit/django-fernet-fields.git@
 pycparser==2.22
 sqlparse==0.5.3
 tzdata==2025.2
+django-widget-tweaks
