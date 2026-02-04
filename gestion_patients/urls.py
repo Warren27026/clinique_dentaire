@@ -1,17 +1,9 @@
 from django.urls import path
 from . import views
-
-"""urlpatterns = [
-    path('', views.accueil, name='accueil'),
-    path('enregistrer_patient/', views.enregistrer_patient, name='enregistrer_patient'),
-    path('authentifier_patient/', views.authentifier_patient, name='authentifier_patient'),
-    path('gerer_rendez_vous/', views.gerer_rendez_vous, name='gerer_rendez_vous'),
-    path('gerer_dossier_medical/', views.gerer_dossier_medical, name='gerer_dossier_medical'),
-]"""
-
-from django.urls import path
-from . import views
 from django.contrib.auth.views import LogoutView
+from gestion_patients.views import DossierEditView
+from .views import PatientDeleteView
+
 urlpatterns = [
        path('', views.accueil, name='accueil'),
        path('patients/', views.patient_list, name='patient_list'),
@@ -29,4 +21,26 @@ urlpatterns = [
        path('patient/dashboard/', views.patient_dashboard, name='patient_dashboard'),
        path('bon/', views.bon_assurance_list, name='bon_assurance_list'),
        path('accounts/logout/', LogoutView.as_view(template_name='registration/logged_out.html'), name='logout'),
+       path('dossier/', views.consulter_dossier, name='consulter_dossier'),
+       path('rdv/', views.gerer_rdv, name='gerer_rdv'),
+    path('patients/enregistrer/', views.enregistrer_patient, name='enregistrer_patient'),
+    path('bons_assurance/', views.consulter_bons_assurance, name='consulter_bons_assurance'),
+    path('proforma/<int:proforma_id>/valider/', views.valider_proforma, name='valider_proforma'),
+    path('resultat/edit/<int:pk>/', views.edit_resultat, name='edit_resultat'),
+    path('resultat/delete/<int:pk>/', views.delete_resultat, name='delete_resultat'),
+    path('examen_resultat/modifier/<int:pk>/', views.modifier_examen_resultat, name='modifier_examen_resultat'),
+    path('resultat/edit/<int:pk>/', views.edit_resultat, name='edit_resultat'),
+    path('dossiers/', views.dossier_patient, name='dossier_patient'),
+    path('dossier/<int:pk>/edit/', DossierEditView.as_view(), name='dossier_edit'),
+    path('rendez-vous/<int:pk>/edit/', views.rdv_edit, name='rdv_edit'),
+    path('appointments/delete/<int:pk>/', views.delete_appointment, name='rdv_delete'),
+    path('dossiers/ajouter/', views.dossier_form, name='dossier_form'),
+     path('patients/<int:pk>/supprimer/', PatientDeleteView.as_view(), name='patient_delete'),
+     path('proformas/', views.proforma_list, name='proforma_list'),
+    path('proformas/create/', views.proforma_create, name='proforma_create'),
+    path('proformas/<int:pk>/edit/', views.proforma_edit, name='proforma_edit'),
+    path('proformas/<int:pk>/delete/', views.proforma_delete, name='proforma_delete'),
+    path('resultats/create/', views.create_resultat, name='create_resultat'),
+    path('dossiers/creer/', views.dossier_create, name='dossier_create'),
+   path('dossiers/<int:pk>/supprimer/', views.dossier_delete, name='dossier_delete'), 
    ]

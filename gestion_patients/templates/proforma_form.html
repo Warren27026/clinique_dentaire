@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <div class="container mt-4">
+    <h2>Créer / Modifier une ProForma</h2>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+      
+      <div class="mb-3">
+        {{ form.patient.label_tag }}
+        {{ form.patient }}
+        {% if form.patient.errors %}
+          <div class="text-danger">
+            {{ form.patient.errors }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.statut.label_tag }}
+        {{ form.statut }}
+        {% if form.statut.errors %}
+          <div class="text-danger">
+            {{ form.statut.errors }}
+          </div>
+        {% endif %}
+      </div>
+
+      <!--div class="mb-3">
+        {{ form.date_creation_display.label_tag }}
+        {{ form.date_creation_display }}
+      </div-->
+
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
+      <a href="{% url 'proforma_list' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+  </div>
+{% endblock %}

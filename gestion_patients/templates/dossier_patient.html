@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="card mt-4">
+        <h2><i class="bi bi-folder icon"></i> Les Dossiers Médicaux</h2>
+        <table class="table table-striped">
+           <thead>
+               <tr>
+                   <th>Patient</th>
+                   <th>Date de Création</th>
+                   <th>Antécédents</th>
+                   <th>Traitements</th>
+                   <th>Prescriptions</th>
+                   <th>Actions</th>
+               </tr>
+           </thead>
+           <tbody>
+               {% for dossier in dossiers %}
+                   <tr>
+                       <td>{{ dossier.patient }}</td>
+                       <td>{{ dossier.date_creation|date:"d/m/Y" }}</td>
+                       <td>{{ dossier.antecedents }}</td>
+                       <td>{{ dossier.traitements }}</td>
+                       <td>{{ dossier.prescriptions }}</td>
+                       <td>
+                           <a href="{% url 'dossier_edit' dossier.id %}" class="btn btn-warning btn-sm">Modifier</a>
+                           <a href="{% url 'dossier_delete' pk=dossier.pk %}" class="btn btn-danger"><i class="bi bi-trash"></i> Supprimer</a>
+
+                       </td>
+                   </tr>
+               {% empty %}
+                   <tr>
+                       <td colspan="6" class="text-center">Aucun dossier médical disponible.</td>
+                   </tr>
+               {% endfor %}
+           </tbody>
+        </table>
+        <a href="{% url 'dossier_create' %}" class="btn btn-success btn-custom">
+            <i class="bi bi-folder-plus icon"></i> Ajouter un dossier
+        </a>
+        
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-3 p-4">
+        <div class="text-center">
+            <h2 class="mb-4 text-primary"><i class="bi bi-pencil-square"></i>Créer ou Modifier le Dossier Médical</h2>
+        </div>
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <!-- Patient -->
+            <div class="mb-3">
+                <label for="id_patient" class="form-label">
+                    <i class="bi bi-person-fill"></i> Patient
+                </label>
+                {{ form.patient|add_class:"form-control form-control-lg" }}
+            </div>
+
+            <!-- Antécédents -->
+            <div class="mb-3">
+                <label for="id_antecedents" class="form-label">
+                    <i class="bi bi-clipboard-heart-fill"></i> Antécédents
+                </label>
+                {{ form.antecedents|add_class:"form-control form-control-lg" }}
+            </div>
+
+            <!-- Traitements -->
+            <div class="mb-3">
+                <label for="id_traitements" class="form-label">
+                    <i class="bi bi-capsule-pill"></i> Traitements
+                </label>
+                {{ form.traitements|add_class:"form-control form-control-lg" }}
+            </div>
+
+            <!-- Prescriptions -->
+            <div class="mb-3">
+                <label for="id_prescriptions" class="form-label">
+                    <i class="bi bi-file-earmark-medical-fill"></i> Prescriptions
+                </label>
+                {{ form.prescriptions|add_class:"form-control form-control-lg" }}
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <a href="{% url 'dossier_patient' %}" class="btn btn-outline-secondary btn-lg">
+                    <i class="bi bi-arrow-left-circle"></i> Retour
+                </a>
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-save-fill"></i> Enregistrer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

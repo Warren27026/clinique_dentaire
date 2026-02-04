@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="card mt-4 p-4">
+        <h2><i class="bi bi-file-earmark-check icon"></i> Valider ou Rejeter un Pro-Forma</h2>
+        <p><strong>Numéro de Proforma :</strong> {{ proforma.id }}</p>
+        <p><strong>Statut actuel :</strong> {{ proforma.statut }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="statut" class="form-label">Changer le statut</label>
+                <select name="statut" id="statut" class="form-control">
+                    <option value="valide">Valider</option>
+                    <option value="rejeté">Rejeter</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-circle icon"></i> Enregistrer</button>
+            <a href="{% url 'proforma_list' %}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Retour</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

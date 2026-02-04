@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="card mt-4">
+        <h2><i class="bi bi-calendar-event icon"></i> Mes Rendez-vous</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date et Heure</th>
+                    <th>Médecin</th>
+                    <th>Motif</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rdv in rdvs %}
+                    <tr>
+                        <td>{{ rdv.date_rdv|date:"d/m/Y H:i" }}</td>
+                        <td>{{ rdv.medecin }}</td>
+                        <td>{{ rdv.motif }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">Aucun rendez-vous disponible.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

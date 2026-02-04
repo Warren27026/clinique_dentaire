@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
-
-from django.conf import settings  # Importer settings pour AUTH_USER_MODEL
+from datetime import datetime
+from django.conf import settings  
+from django.contrib.auth.models import Group
+from django.utils import timezone
 
 from django.contrib.auth import get_user_model
-
 class Patient(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     biometric_id = models.CharField(max_length=100, unique=True)
@@ -83,13 +84,27 @@ class PatientUser(AbstractUser):
         return f"{self.nom} {self.prenom}"
     
 class BonAssurance(models.Model):
-    patient = models.ForeignKey('gestion_patients.PatientUser', on_delete=models.CASCADE)
+    patient = models.ForeignKey(PatientUser, on_delete=models.CASCADE)
     numero_bon = models.CharField(max_length=50, unique=True)
-    date_creation = models.DateTimeField(auto_now_add=True)
-    statut = models.CharField(max_length=20, choices=[('en_attente', 'En attente'), ('valide', 'Valide'), ('rejeté', 'Rejeté')], default='en_attente')
+    statut = models.CharField(max_length=20, choices=[('en_attente', 'En attente'), ('valide', 'Valide')])
+    date_creation=datetime.now()
+
+class ProForma(models.Model):
+    patient = models.ForeignKey(PatientUser, on_delete=models.CASCADE)
+    statut = models.CharField(
+        max_length=50,
+        choices=[
+            ('brouillon', 'Brouillon'),
+            ('valide', 'Validé'),
+            ('rejeté', 'Rejeté'),
+            ('payé', 'Payé'),
+        ],
+        default='brouillon',
+    )
+    date_creation = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"Bon {self.numero_bon} - {self.patient}"
+        return f"ProForma {self.id} - {self.client}"
 class ExamenResultat(models.Model):
     patient = models.ForeignKey('gestion_patients.PatientUser', on_delete=models.CASCADE)
     date_examen = models.DateTimeField()

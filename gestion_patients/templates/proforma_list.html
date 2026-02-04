@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="card mt-4">
+        <h2><i class="bi bi-file-earmark-text icon"></i> Liste des ProForma</h2>
+        <a href="{% url 'proforma_create' %}" class="btn btn-primary btn-custom mb-3">
+            <i class="bi bi-file-plus icon"></i> Ajouter une ProForma
+        </a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Statut</th>
+                    <th>Date de Création</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for proforma in proformas %}
+                    <tr>
+                        <td>{{ proforma.id }}</td>
+                        <td>{{ proforma.client }}</td>
+                        <td>{{ proforma.statut|capfirst }}</td>
+                        <td>{{ proforma.date_creation|date:"d/m/Y H:i" }}</td>
+                        <td>
+                            <a href="{% url 'proforma_edit' pk=proforma.id %}" class="btn btn-sm btn-primary">
+                                <i class="bi bi-pencil icon"></i> Modifier
+                            </a>
+                            <a href="{% url 'proforma_view' pk=proforma.id %}" class="btn btn-sm btn-info">
+                                <i class="bi bi-eye icon"></i> Voir
+                            </a>
+                            <a href="{% url 'proforma_delete' pk=proforma.id %}" class="btn btn-sm btn-danger" 
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette ProForma ?');">
+                                <i class="bi bi-trash icon"></i> Supprimer
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">Aucune ProForma disponible.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

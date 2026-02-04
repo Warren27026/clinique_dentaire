@@ -1,42 +1,242 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinique Dentaire La Couronne</title>
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <title>{% block title %}Clinique Dentaire La Couronne{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="{% static 'icons/bootstrap-icons.css' %}">
+    <style>
+        
+     body {
+         font-family: 'Roboto', sans-serif;
+         background-color: #F5F7FA;
+         margin: 0;
+         padding: 0;
+         color: #333333;
+     }
+
+     .container {
+         max-width: 1200px;
+         margin: 0 auto;
+         padding: 20px;
+     }
+
+     h1, h2 {
+         color: #2B4E72;
+         margin-bottom: 20px;
+         font-weight: 700;
+         text-transform: uppercase;
+         letter-spacing: 1px;
+     }
+
+     .card {
+         background-color: #FFFFFF;
+         border-radius: 12px;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+         padding: 25px;
+         margin-bottom: 30px;
+         transition: transform 0.3s ease, box-shadow 0.3s ease;
+     }
+
+     .card:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+     }
+
+     .navbar {
+         background-color: #4A90E2 !important;
+         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+     }
+
+     .navbar-brand {
+         font-weight: 700;
+         font-size: 1.5rem;
+         color: #FFFFFF !important;
+     }
+
+     .nav-link {
+         color: #FFFFFF !important;
+         transition: color 0.3s ease, transform 0.3s ease;
+     }
+
+     .nav-link:hover {
+         color: #DDEEFF !important;
+         transform: scale(1.1);
+     }
+
+     table {
+         width: 100%;
+         border-collapse: collapse;
+         margin-bottom: 20px;
+         background-color: #FFFFFF;
+         border-radius: 8px;
+         overflow: hidden;
+     }
+
+     th, td {
+         padding: 15px;
+         text-align: left;
+         border-bottom: 1px solid #E9ECEF;
+     }
+
+     th {
+         background-color: #2B4E72;
+         color: #FFFFFF;
+         font-weight: 600;
+     }
+
+     tr:hover {
+         background-color: #F1F3F5;
+     }
+
+     .btn-custom {
+         padding: 12px 24px;
+         border-radius: 50px;
+         font-weight: 500;
+         transition: background-color 0.3s ease, transform 0.3s ease;
+     }
+
+     .btn-primary {
+         background-color: #4A90E2;
+         border-color: #4A90E2;
+     }
+
+     .btn-primary:hover {
+         background-color: #357ABD;
+         border-color: #357ABD;
+         transform: translateY(-2px);
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     }
+
+     .btn-success {
+         background-color: #6AB04C;
+         border-color: #6AB04C;
+     }
+
+     .btn-success:hover {
+         background-color: #558C3F;
+         border-color: #558C3F;
+         transform: translateY(-2px);
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     }
+
+     .btn-danger {
+         background-color: #E57373;
+         border-color: #E57373;
+     }
+
+     .btn-danger:hover {
+         background-color: #C95C5C;
+         border-color: #C95C5C;
+         transform: translateY(-2px);
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     }
+
+     .btn-secondary {
+         background-color: #6C757D;
+         border-color: #6C757D;
+     }
+
+     .btn-secondary:hover {
+         background-color: #5A6268;
+         border-color: #5A6268;
+         transform: translateY(-2px);
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     }
+
+     .alert {
+         padding: 15px;
+         border-radius: 8px;
+         margin-bottom: 20px;
+         animation: fadeIn 0.5s ease-in;
+     }
+
+     .alert-success {
+         background-color: #E8F5E9;
+         color: #2E7D32;
+         border: 1px solid #C8E6C9;
+     }
+
+     .alert-danger {
+         background-color: #FFEBEE;
+         color: #C62828;
+         border: 1px solid #FFCDD2;
+     }
+
+     .form-control {
+         border-radius: 8px;
+         border-color: #CED4DA;
+         transition: border-color 0.3s ease, box-shadow 0.3s ease;
+     }
+
+     .form-control:focus {
+         border-color: #4A90E2;
+         box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+     }
+
+     @keyframes fadeIn {
+         from { opacity: 0; transform: translateY(-10px); }
+         to { opacity: 1; transform: translateY(0); }
+     }
+
+     .icon {
+         margin-right: 8px;
+     }
+.btn-custom:hover {
+    background-color: #6AB04C;
+    transition: background-color 0.3s ease;
+}
+.navbar-dark .nav-link:hover {
+    color: #6AB04C !important;
+}
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">La Couronne</a>
-            <div class="collapse navbar-collapse">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'accueil' %}" style="font-family: 'Pacifico', cursive; color: white;">
+            Clinique Dentaire <span style="color: #A52A2A;">La Couronne</span>
+        </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-    <li class="nav-item">
-        <a class="nav-link active" href="{% url 'accueil' %}"><i class="bi bi-house icon"></i> Accueil</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'patient_list' %}"><i class="bi bi-people icon"></i> Patients</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'appointment_list' %}"><i class="bi bi-calendar-event icon"></i> Rendez-vous</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'dossier_create' %}"><i class="bi bi-folder icon"></i> Dossier Médical</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'examen_resultat_list' %}"><i class="bi bi-clipboard-data icon"></i> Résultats Examens</a>
-    </li>
-    {% if user.groups.name == 'Assurance' %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'patient_list' %}"><i class="bi bi-person-check icon"></i> Vérifier Patients</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'bon_assurance_list' %}"><i class="bi bi-shield-check icon"></i> Valider Bons</a>
-        </li>
-    {% endif %}
-</ul>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'accueil' %}"><i class="bi bi-house icon"></i> Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'patient_list' %}"><i class="bi bi-people icon"></i> Patients</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'appointment_list' %}"><i class="bi bi-calendar-event icon"></i> Rendez-vous</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'dossier_patient' %}"><i class="bi bi-folder icon"></i> Dossiers Patients</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'examen_resultat_list' %}"><i class="bi bi-clipboard-data icon"></i> Résultats Examens</a></li>
+                   
+                        <li class="nav-item"><a class="nav-link" href="{% url 'patient_list' %}"><i class="bi bi-person-check icon"></i> Vérifier Patients</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'bon_assurance_list' %}"><i class="bi bi-shield-check icon"></i> Valider Bons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'proforma_list' %}"><i class="bi bi-file-earmark-text icon"></i> Gestion Proformas</a></li>
+                    {% if user.is_authenticated and user.is_staff %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}"><i class="bi bi-gear"></i> Admin</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link btn btn-link text-white" style="border: none; background: none; padding: 0;">
+                                <i class="bi bi-box-arrow-right"></i> Déconnexion
+                            </button>
+                            </form>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </nav>
@@ -45,6 +245,7 @@
         {% endblock %}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/scripts.js' %}"></script>
+     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+     
 </body>
 </html>

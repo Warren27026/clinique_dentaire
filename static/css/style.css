@@ -181,3 +181,25 @@
 .navbar-dark .nav-link:hover {
     color: #6AB04C !important;
 }
+
+
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/static/fonts/roboto/Roboto-Regular.woff2') format('woff2'),
+         url('/static/fonts/roboto/Roboto-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/static/fonts/roboto/Roboto-Bold.woff2') format('woff2'),
+         url('/static/fonts/roboto/Roboto-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
