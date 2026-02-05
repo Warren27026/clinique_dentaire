@@ -3,7 +3,7 @@
 Bienvenue sur le dépôt de mon application de gestion de clinique dentaire. Ce projet a été développé avec **Django** (Python) pour faciliter l'administration quotidienne d'un cabinet dentaire : suivi des patients, prise de rendez-vous et génération de documents.
 
 🔗 **Démo en ligne :** [https://warren27026.pythonanywhere.com](https://warren27026.pythonanywhere.com)
-*(Si le lien est actif)*
+
 
 ## 🚀 Fonctionnalités Principales
 
